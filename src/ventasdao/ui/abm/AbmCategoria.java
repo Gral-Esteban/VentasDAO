@@ -143,7 +143,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                             .addComponent(jtfDenominacion)
                             .addComponent(jtfDescripcion)
                             .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
@@ -176,25 +176,6 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jbAltaCategoriaActionPerformed
-        
-        
-        // TODO add your handling code here:
-        categoria = new Categoria();
-        
-        categoria.setDenominacion(jtfDenominacion.getText());
-        categoria.setDescripcion(jtfDescripcion.getText());
-        
-        
-        categoriaControlador.crear(categoria);
-           
-        jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
-    }//GEN-LAST:event_jbAltaCategoriaActionPerformed
-
-    private void jbAltaCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAltaCategoriaMouseClicked
-     
-    }//GEN-LAST:event_jbAltaCategoriaMouseClicked
 
     private void jtListadoCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoCategoriasMouseClicked
         
@@ -234,6 +215,31 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
     private void jtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfIdActionPerformed
+
+    private void jbAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaCategoriaActionPerformed
+  // TODO add your handling code here:
+        categoria = new Categoria();
+        
+        categoria.setDenominacion(jtfDenominacion.getText());
+        categoria.setDescripcion(jtfDescripcion.getText());
+        
+        
+        try {
+            categoriaControlador.crear(categoria);
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        try {
+            jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbAltaCategoriaActionPerformed
+
+    private void jbAltaCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAltaCategoriaMouseClicked
+
+    }//GEN-LAST:event_jbAltaCategoriaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
