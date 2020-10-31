@@ -65,9 +65,10 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         jbAltaCategoria = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListadoCategorias = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jbModificarCategoria = new javax.swing.JButton();
         jtfId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jbBajasCategorias = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -105,10 +106,10 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtListadoCategorias);
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbModificarCategoria.setText("Modificar");
+        jbModificarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbModificarCategoriaActionPerformed(evt);
             }
         });
 
@@ -121,19 +122,21 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Id");
 
+        jbBajasCategorias.setText("Eliminar");
+        jbBajasCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajasCategoriasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jbAltaCategoria)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,8 +145,15 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfDenominacion)
                             .addComponent(jtfDescripcion)
-                            .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                            .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jbAltaCategoria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbModificarCategoria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbBajasCategorias)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
@@ -167,11 +177,12 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbAltaCategoria)
-                            .addComponent(jButton1)))
+                            .addComponent(jbModificarCategoria)
+                            .addComponent(jbBajasCategorias)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,7 +200,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jtListadoCategoriasMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbModificarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarCategoriaActionPerformed
         try {
             // TODO add your handling code here:
             
@@ -210,7 +221,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbModificarCategoriaActionPerformed
 
     private void jtfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdActionPerformed
         // TODO add your handling code here:
@@ -241,14 +252,33 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbAltaCategoriaMouseClicked
 
+    private void jbBajasCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajasCategoriasActionPerformed
+        // TODO add your handling code here:
+        categoria = new Categoria();
+        categoria.setId(Integer.parseInt(jtfId.getText()));
+        
+        try {
+            categoriaControlador.eliminar(categoria);
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbBajasCategoriasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbAltaCategoria;
+    private javax.swing.JButton jbBajasCategorias;
+    private javax.swing.JButton jbModificarCategoria;
     private javax.swing.JTable jtListadoCategorias;
     private javax.swing.JTextField jtfDenominacion;
     private javax.swing.JTextField jtfDescripcion;

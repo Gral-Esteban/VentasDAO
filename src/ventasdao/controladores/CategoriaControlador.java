@@ -105,12 +105,13 @@ public class CategoriaControlador implements ICrud<Categoria>{
             ps.setInt(1, entidad.getId());
             ps.executeUpdate();
             connection.close();
-            return true;
+            
             
         } catch (SQLException e) {
              Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, e);
              return false;
         }
+        return true;
     }
 
     @Override
