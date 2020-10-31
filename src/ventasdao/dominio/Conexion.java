@@ -69,7 +69,7 @@ public class Conexion {
    }
    
  
-   
+   Integer name=30;
    
      
       

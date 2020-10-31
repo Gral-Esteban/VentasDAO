@@ -49,6 +49,7 @@ public class CategoriaControlador implements ICrud<Categoria>{
             
             ArrayList<Categoria> categorias = new ArrayList();
             
+            
             while(rs.next()){
                 
                 Categoria categoria = new Categoria();
@@ -95,7 +96,21 @@ public class CategoriaControlador implements ICrud<Categoria>{
 
     @Override
     public boolean eliminar(Categoria entidad) throws SQLException, Exception{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        connection = Conexion.obtenerConexion();
+        
+        String sql = "DELETE FROM categorias WHERE id = ?";
+        try {
+            ps=connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+            return true;
+            
+        } catch (SQLException e) {
+             Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, e);
+             return false;
+        }
     }
 
     @Override
