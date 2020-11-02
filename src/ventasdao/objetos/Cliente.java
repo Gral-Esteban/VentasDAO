@@ -13,32 +13,35 @@ public class Cliente {
     
     private Integer id;
     
-    private String documento;
-    
     private String nombre;
     
     private String apellido;
     
-    private TipoCliente tipoCliente;
+    private Integer tipoCliente;
+    
+    private Integer documento;
+    
+    
+    
 
-    public TipoCliente getTipoCliente() {
+    public Integer getTipoCliente() {
         return tipoCliente;
     }
 
-    public void setTipoCliente(TipoCliente tipoCliente) {
+    public void setTipoCliente(Integer tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
 
     
 
-    public String getCuil() {
+    /*public String getCuil() {
         return documento;
     }
 
     public void setCuil(String cuil) {
         this.documento = cuil;
     }
-
+*/
 
 
     public Integer getId() {
@@ -50,10 +53,10 @@ public class Cliente {
     }
 
 
-    public String getDocumento() { return documento;
+    public Integer getDocumento() { return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(Integer documento) {
         this.documento = documento;
     }
 

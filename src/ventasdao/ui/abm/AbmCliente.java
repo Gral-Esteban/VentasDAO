@@ -5,21 +5,24 @@
  */
 package ventasdao.ui.abm;
 
-import java.sql.SQLException;
+//import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+//import javax.swing.table.DefaultTableModel;
+
 import java.util.ArrayList;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.objetos.Cliente;
+
 import ventasdao.ui.grilla.GrillaCliente;
 
 /**
  *
- * @author Hugo Chanampe
+ * @author Esteban DAlbano
  */
 public class AbmCliente extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form AbmCliente
-     */
+    
+    
     private Cliente cliente;
     private GrillaCliente grillaCliente;
     private ClienteControlador clienteControlador = new ClienteControlador();
@@ -27,22 +30,43 @@ public class AbmCliente extends javax.swing.JInternalFrame {
     
     
     public AbmCliente() {
+        
         initComponents();
         
         ArrayList<Cliente> clientes;
         try {
             clientes = clienteControlador.listar();
             grillaCliente = new GrillaCliente(clientes);
+             jtListadoClientes.setModel(grillaCliente);
         } catch (Exception e) {
             e.printStackTrace ();
         }
 
 
         
-        jtListadoCliente.setModel(grillaCliente);
         
+       
+    }
+    
+    public void limpiarCampos(){
+    
+    jtfNombre.setText("");
+    jtfApellido.setText("");
+       
+    jtfDocumento.setText("");
+     jtfTipoCliente.setText("");
+        
+        
+       
         
     }
+
+   
+
+    /**
+     * Creates new form AbmCliente
+     */
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,38 +75,27 @@ public class AbmCliente extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()  {
+    private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtListadoClientes = new javax.swing.JTable();
+        jbAltaCliente = new javax.swing.JButton();
+        jbModificarCliente = new javax.swing.JButton();
+        jbBajaCliente = new javax.swing.JButton();
+        jtfId = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
-        jtfCuil = new javax.swing.JTextField();
-        jtfRazonSocial = new javax.swing.JTextField();
+        jtfApellido = new javax.swing.JTextField();
+        jtfDocumento = new javax.swing.JTextField();
+        jtfTipoCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtListadoCliente = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        setClosable(true);
-
-        jLabel1.setText("Nombre");
-
-        jLabel2.setText("Cuil");
-
-        jLabel3.setText("Razon Social");
-
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (Exception e) {
-                    e.printStackTrace ();
-                }
-            }
-        });
-
-        jtListadoCliente.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -93,87 +106,183 @@ public class AbmCliente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtListadoCliente);
+        jScrollPane1.setViewportView(jTable1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jtListadoClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jtListadoClientes);
+
+        jbAltaCliente.setText("Agregar");
+        jbAltaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaClienteActionPerformed(evt);
+            }
+        });
+
+        jbModificarCliente.setText("Modificar");
+        jbModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarClienteActionPerformed(evt);
+            }
+        });
+
+        jbBajaCliente.setText("Eliminar");
+        jbBajaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaClienteActionPerformed(evt);
+            }
+        });
+
+        jtfId.setEditable(false);
+
+        jLabel1.setText("Id");
+
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Apellido");
+
+        jLabel4.setText("Documento");
+
+        jLabel5.setText("TipoCliente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfNombre)
-                            .addComponent(jtfCuil)
-                            .addComponent(jtfRazonSocial, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfId)
+                    .addComponent(jtfNombre)
+                    .addComponent(jtfApellido)
+                    .addComponent(jtfDocumento)
+                    .addComponent(jtfTipoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jbAltaCliente)
+                .addGap(39, 39, 39)
+                .addComponent(jbModificarCliente)
+                .addGap(44, 44, 44)
+                .addComponent(jbBajaCliente)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCuil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton1))
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAltaCliente)
+                    .addComponent(jbModificarCliente)
+                    .addComponent(jbBajaCliente))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception  {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBajaClienteActionPerformed
+
+    private void jbModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbModificarClienteActionPerformed
+
+    private void jbAltaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaClienteActionPerformed
         // TODO add your handling code here:
         cliente = new Cliente();
-        cliente.setCuil(jtfCuil.getText());
-        cliente.setNombre(jtfNombre.getText());
-        cliente.setApellido(jtfRazonSocial.getText());
 
+        cliente.setNombre(jtfNombre.getText());
+        cliente.setApellido(jtfApellido.getText());
+
+        
+        
         try {
             clienteControlador.crear(cliente);
-        }catch (SQLException e){
-            e.printStackTrace ();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            jtListadoClientes.setModel(new GrillaCliente(clienteControlador.listar()));
+        } catch (Exception ex) {
+            Logger.getLogger(AbmCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbAltaClienteActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtListadoCliente;
-    private javax.swing.JTextField jtfCuil;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbAltaCliente;
+    private javax.swing.JButton jbBajaCliente;
+    private javax.swing.JButton jbModificarCliente;
+    private javax.swing.JTable jtListadoClientes;
+    private javax.swing.JTextField jtfApellido;
+    private javax.swing.JTextField jtfDocumento;
+    private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfNombre;
-    private javax.swing.JTextField jtfRazonSocial;
+    private javax.swing.JTextField jtfTipoCliente;
     // End of variables declaration//GEN-END:variables
+
 }

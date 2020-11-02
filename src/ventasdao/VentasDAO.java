@@ -28,7 +28,9 @@ public class VentasDAO {
 
         categoriaControlador.crear ( categoria );
 
+Cliente cliente = new Cliente();
 
+//clienteControlador.eliminar(cliente);
 
     }
     
